@@ -14,7 +14,15 @@
 <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
     <div class="sm:mx-auto sm:w-full sm:max-w-sm">
         <img class="mx-auto h-16 w-auto" src="http://presensi-online.private/attendance.svg" alt="attendance Online">
-        <h2 class="mt-10 text-center text-2xl/9 font-bold tracking-tight text-white">{{ Request::is('login') ? 'Sign in to your account' : 'Create new account'}}</h2>
+        <h2 class="mt-10 text-center text-2xl/9 font-bold tracking-tight text-white">
+            @if(Request::is('login'))
+                Sign in to your account
+            @elseif(Request::is('admin/login'))
+                Welcome back Admin
+            @else
+                Create new account
+            @endif
+        </h2>
     </div>
 
     <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
@@ -38,6 +46,8 @@
             @if(Request::is('login'))
                 Not a member?
                 <a href="{{ url('sign-up') }}" class="font-semibold text-indigo-600 hover:text-indigo-500">Sign up</a>
+            @elseif(Request::is('admin/login'))
+
             @else
                 Have an account?
                 <a href="{{ url('login') }}" class="font-semibold text-indigo-600 hover:text-indigo-500">Sign in</a>
